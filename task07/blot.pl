@@ -9,9 +9,9 @@ boryaStBlot(Who) :- Who=vitya, not(Who=alex).
 vityaStBlot(Who) :- not(Who=borya).
 vityaStHW(Who) :- not(Who=vitya).
 
-blot(Who) :- (suspect(Who), alexStBlot(Who), boryaStBlot(Who)).
-blot(Who) :- (suspect(Who), vityaStBlot(Who), boryaStBlot(Who)).
-blot(Who) :- (suspect(Who), alexStBlot(Who), vityaStBlot(Who)).
+blot(Who) :- (suspect(Who), alexStBlot(Who), boryaStBlot(Who), not(vityaStBlot(Who))).
+blot(Who) :- (suspect(Who), vityaStBlot(Who), boryaStBlot(Who), not(alexStBlot(Who))).
+blot(Who) :- (suspect(Who), alexStBlot(Who), vityaStBlot(Who), not(boryaStBlot(Who))).
 
 
 

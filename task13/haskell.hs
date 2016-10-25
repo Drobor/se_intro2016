@@ -1,10 +1,10 @@
-main = print $ (sqrt_n 65536)
+main = print $ (sqrt_n 0)
 
 sqrt_n num | num < 0   = (-1) -- undefined throws exception
            | otherwise = sqrtInternal num (num * 0.5)
 
-sqrtInternal num result | abs (curVal - result) > abs(num * 0.000001) = sqrtInternal num curVal
-                        | otherwise                                   = curVal
+sqrtInternal num result | abs (num - result * result) > abs(num * 0.000001) = sqrtInternal num curVal
+                        | otherwise                                         = result
              where curVal = (result + num / result) * 0.5
 
 sum_digits num | num > 0   = (num `mod` 10) + sum_digits (num `div` 10)

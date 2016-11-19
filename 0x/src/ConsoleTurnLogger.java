@@ -8,7 +8,7 @@ public class ConsoleTurnLogger implements IGameLogger {
         Player curPlayer = turnResult.getCurrentPlayer();
         GameState state = turnResult.getGameState();
 
-        System.out.println("Turn " + ++turnCounter);
+        System.out.println("Turn " + ++this.turnCounter);
         System.out.println(curPlayer.toString() + " decided to move on " + turnResult.getMove().toString());
 
         if (!turnResult.getMoveValid())

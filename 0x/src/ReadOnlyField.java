@@ -11,21 +11,21 @@ public class ReadOnlyField implements IField {
     public ReadOnlyField(int fieldSizeX, int fieldSizeY) {
         if (fieldSizeX < 1 || fieldSizeY < 1)
             throw new RuntimeException("impossible field parameters");
-        field = new Player[fieldSizeX][fieldSizeY];
+        this.field = new Player[fieldSizeX][fieldSizeY];
     }
 
     public int getSizeX() {
-        return field.length;
+        return this.field.length;
     }
     public int getSizeY() {
-        return field[0].length;
+        return this.field[0].length;
     }
 
     public boolean isEmpty(int x, int y) {
-        return field[x][y] == null;
+        return this.field[x][y] == null;
     }
 
     public Player get(int x, int y) {
-        return field[x][y];
+        return this.field[x][y];
     }
 }

@@ -12,11 +12,11 @@ public class RowVictoryChecker implements IVictoryChecker {
 
     public GameState check(IField field) {
         GameState returns;
-        for (int sx = 0; sx <= field.getSizeX() - rowLength; sx++) {//shift by X from the up left corner
-            for (int sy = 0; sy <= field.getSizeY() - rowLength; sy++) {
+        for (int sx = 0; sx <= field.getSizeX() - this.rowLength; sx++) {//shift by X from the up left corner
+            for (int sy = 0; sy <= field.getSizeY() - this.rowLength; sy++) {
                 if (!((returns = checkHorizontalVertical(field, sx, sy)) == null))
                     return returns;
-                if (checkDiagonals && (!((returns = checkDiagonals(field, sx, sy)) == null)))
+                if (this.checkDiagonals && (!((returns = checkDiagonals(field, sx, sy)) == null)))
                     return returns;
             }
         }
@@ -32,10 +32,10 @@ public class RowVictoryChecker implements IVictoryChecker {
     }
 
     GameState checkDiagonals(IField field, int sx, int sy) {
-        int upRightCorner = sy + rowLength - 1;
+        int upRightCorner = sy + this.rowLength - 1;
         Player d1Player = field.get(sx, sy);
         Player d2Player = field.get(sx, upRightCorner);
-        for (int i = 1; i < rowLength; i++) {
+        for (int i = 1; i < this.rowLength; i++) {
             if (!(d1Player == field.get(sx + i, sy + i)))
                 d1Player = null;
             if (!(d2Player == field.get(sx + i, upRightCorner - i)))
@@ -49,10 +49,10 @@ public class RowVictoryChecker implements IVictoryChecker {
     }
 
     GameState checkHorizontalVertical(IField field, int sx, int sy) {
-        for (int x = 0; x < rowLength; x++) {
+        for (int x = 0; x < this.rowLength; x++) {
             Player curPlayer = field.get(sx + x, sy);
 
-            for (int y = 1; y < rowLength; y++)
+            for (int y = 1; y < this.rowLength; y++)
                 if (!(curPlayer == field.get(sx + x, sy + y)))
                     curPlayer = null;
 
@@ -61,7 +61,7 @@ public class RowVictoryChecker implements IVictoryChecker {
 
             curPlayer = field.get(sx, sy + x);
 
-            for (int y = 1; y < rowLength; y++)
+            for (int y = 1; y < this.rowLength; y++)
                 if (!(curPlayer == field.get(sx + y, sy + x)))
                     curPlayer = null;
 

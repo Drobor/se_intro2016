@@ -7,11 +7,11 @@ public class RandomInputProvider implements IInputProvider {
     private Random rnd = new Random();
 
     public Point getMove(IField field) {
-        int x = rnd.nextInt(field.getSizeX());
-        int y = rnd.nextInt(field.getSizeY());
+        int x = this.rnd.nextInt(field.getSizeX());
+        int y = this.rnd.nextInt(field.getSizeY());
         while (!field.isEmpty(x, y)) {
-            x = rnd.nextInt(field.getSizeX());
-            y = rnd.nextInt(field.getSizeY());
+            x = this.rnd.nextInt(field.getSizeX());
+            y = this.rnd.nextInt(field.getSizeY());
         }
         return new Point(x, y);
     }

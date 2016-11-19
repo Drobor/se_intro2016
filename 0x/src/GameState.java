@@ -15,11 +15,11 @@ public class GameState {
 
     public boolean getIsDraw()
     {
-        return isDraw;
+        return this.isDraw;
     }
 
     public Player getWinner()
     {
-        return winner;
+        return this.winner;
     }
 }

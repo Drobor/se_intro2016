@@ -13,18 +13,18 @@ public class Player {
     }
 
     public Point getMove(IField field) {
-        return inputProvider.getMove(field);
+        return this.inputProvider.getMove(field);
     }
 
     public char getPlayerChar() {
-        return playerChar;
+        return this.playerChar;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String toString() {
-        return name + "(" + playerChar + ")";
+        return name + "(" + this.playerChar + ")";
     }
 }

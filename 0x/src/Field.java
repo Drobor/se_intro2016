@@ -8,22 +8,22 @@ public class Field extends ReadOnlyField implements IField {
     }
 
     public int getSizeX() {
-        return field.length;
+        return this.field.length;
     }
 
     public Player get(int x, int y) {
-        return field[x][y];
+        return this.field[x][y];
     }
 
     public boolean isEmpty(int x, int y) {
-        return field[x][y] == null;
+        return this.field[x][y] == null;
     }
 
     public void set(int x, int y, Player val) {
-        field[x][y] = val;
+        this.field[x][y] = val;
     }
 
     public ReadOnlyField getSafeAccessField() {//just converting to readonly interface isnt hardcore enough protection
-        return new ReadOnlyField(field);
+        return new ReadOnlyField(this.field);
     }
 }

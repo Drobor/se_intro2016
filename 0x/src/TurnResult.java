@@ -15,19 +15,19 @@ public class TurnResult {
     }
 
     public Player getCurrentPlayer() {
-        return player;
+        return this.player;
     }
 
     public Point getMove() {
-        return move;
+        return this.move;
     }
 
     public boolean getMoveValid() {
-        return moveValid;
+        return this.moveValid;
     }
 
     public GameState getGameState() {
-        return gameState;
+        return this.gameState;
     }
 
 

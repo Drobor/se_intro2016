@@ -46,8 +46,8 @@ public class Game {
             isMoveValid = true;
             this.field.set(move.getX(), move.getY(), player);
         }
-
-        this.curPlayer %= this.players.size();
+        if (this.players.size() > 0)
+            this.curPlayer %= this.players.size();
         return new TurnResult(player, move, isMoveValid, this.victoryChecker.check(field));
     }
 

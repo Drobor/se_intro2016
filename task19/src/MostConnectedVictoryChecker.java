@@ -1,10 +1,7 @@
-import java.util.Dictionary;
-import java.util.HashMap;
-
 /**
  * Created by m295- on 19.11.2016.
  */
-public class MostConnectedVictoryChecker implements IVictoryChecker {
+class MostConnectedVictoryChecker implements IVictoryChecker {
     public GameState check(IField field) {
         if (field.hasEmpty())
             return new GameState(false);
@@ -31,7 +28,7 @@ public class MostConnectedVictoryChecker implements IVictoryChecker {
             return new GameState(field.get(maxBlockX, maxBlockY));
     }
 
-    int dfs(IField field, int x, int y, Player curPlayer, boolean[][] visited) {
+    private int dfs(IField field, int x, int y, Player curPlayer, boolean[][] visited) {
         if (!(field.get(x, y) == curPlayer) || visited[x][y])
             return 0;
         visited[x][y] = true;
@@ -42,7 +39,7 @@ public class MostConnectedVictoryChecker implements IVictoryChecker {
         return returns;
     }
 
-    int tryDFS(IField field, int x, int y, Player curPlayer, boolean[][] visited) {
+    private int tryDFS(IField field, int x, int y, Player curPlayer, boolean[][] visited) {
         if (x < 0 || y < 0 || x >= field.getSizeX() || y >= field.getSizeY())
             return 0;
         return dfs(field, x, y, curPlayer, visited);

@@ -11,7 +11,7 @@ public class GameRunner {
     public void runGame(boolean awaitEachTurn) {
         TurnResult turn;
         for (turn = this.game.makeTurn(); !turn.getGameState().getIsDraw() && turn.getGameState().getWinner() == null; turn = this.game.makeTurn()) {
-            this.logger.log(this.game, turn);
+            this.logger.log(this.game.getField(), turn);
             if (awaitEachTurn)
                 try {
                     for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) ;
@@ -19,7 +19,7 @@ public class GameRunner {
                     //Should do something here. Though nothing should be fine. Hopefully
                 }
         }
-        this.logger.log(this.game, turn);
+        this.logger.log(this.game.getField(), turn);
         if (awaitEachTurn)
             try {
                 for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) ;
@@ -55,11 +55,12 @@ public class GameRunner {
             return new RowVictoryChecker(rowLength, diagonals);
         } else if (temp.equals("connected"))
             return new MostConnectedVictoryChecker();
+        System.out.println("wrong input. Repeat");
         return getRuleSet();
     }
 
     private Point getFieldSize() {
-        System.out.println("type in field width and height");
+        System.out.println("type in field width and height in one line divided with space");
         int width = this.sc.nextInt();
         int height = Integer.parseInt(this.sc.nextLine().trim());
         return new Point(width, height);
@@ -76,6 +77,7 @@ public class GameRunner {
             return new ConsoleInputProvider();
         if (temp.equals("enough"))
             return null;
+        System.out.println("wrong input. Repeat");
         return getPlayer();
     }
 
@@ -95,6 +97,7 @@ public class GameRunner {
             return new ConsoleFieldTurnLogger();
         if (temp.equals("none"))
             return new DummyLogger();
+        System.out.println("wrong input. Repeat");
         return getLogger();
     }
 }

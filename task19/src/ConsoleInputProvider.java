@@ -10,7 +10,7 @@ public class ConsoleInputProvider implements IInputProvider {
         return new Point(x, y);
     }
 
-    int readInt() {
+    private int readInt() {
         int x = 0;
         try {
             for (int c = System.in.read(); c != 10 && c != 13 && c != 32; c = System.in.read())

@@ -3,18 +3,16 @@ import java.util.*;
 /**
  * Created by m295- on 19.11.2016.
  */
-public class NeighbourBotInputProvider extends RandomBotInputProvider implements IInputProvider {
-    private HashMap<Integer, Point> myPoints = new HashMap<Integer, Point>();
-    private int elemSize = 0;
+class NeighbourBotInputProvider extends RandomBotInputProvider implements IInputProvider {
+    private ArrayList<Point> myPoints = new ArrayList<>();
     private Point[] moveOptions = new Point[9];//cuz creating array each move is GC abusive
     private Random rnd = new Random();
 
     public Point getMove(IField field) {
         while (!this.myPoints.isEmpty()) {
             int optionsCount = 0;
-            int pointPos = this.rnd.nextInt(this.elemSize);
+            int pointPos = this.rnd.nextInt(this.myPoints.size());
 
-            for (; !this.myPoints.containsKey(pointPos); pointPos = this.rnd.nextInt(this.elemSize)) ;
             Point point = this.myPoints.get(pointPos);
             int x = point.getX();
             int y = point.getY();
@@ -26,16 +24,15 @@ public class NeighbourBotInputProvider extends RandomBotInputProvider implements
 
             if (optionsCount > 0) {
                 Point move = this.moveOptions[this.rnd.nextInt(optionsCount)];
-                this.myPoints.put(this.elemSize++, move);
+                this.myPoints.add(move);
                 return move;
             } else {
-                this.myPoints.put(pointPos, point);
-                this.myPoints.remove(--this.elemSize);
+                this.myPoints.set(pointPos, this.myPoints.get(this.myPoints.size() - 1));
+                this.myPoints.remove(this.myPoints.size() - 1);
             }
-
         }
         Point move = super.getMove(field);
-        this.myPoints.put(this.elemSize++, move);
+        this.myPoints.add(move);
         return move;
     }
 

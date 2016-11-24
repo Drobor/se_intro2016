@@ -1,4 +1,4 @@
-class Point {
+public class Point {
     private int x, y;
 
     public Point(int x, int y) {
@@ -17,4 +17,18 @@ class Point {
     public String toString() {
         return "(" + Integer.toString(this.x) + "; " + Integer.toString(this.y) + ")";
     }
+
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Point) {
+            Point pt = (Point) obj;
+            return pt.x == this.x && pt.y == this.y;
+        }
+        return this == obj;
+    }
+
+    public int hashCode() {
+        return Integer.hashCode(x) ^ Integer.hashCode(y);
+    }
+
 }

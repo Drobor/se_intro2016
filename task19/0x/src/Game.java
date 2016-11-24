@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game {
 
-    int curPlayer; //can i add new players after game starts?
+    private int curPlayer; //can i add new players after game starts?
     private ArrayList<Player> players = new ArrayList<Player>();
     private HashSet<Character> usedChars = new HashSet<Character>();
     private Field field;
@@ -42,12 +42,12 @@ public class Game {
         if (!this.field.isEmpty(move.getX(), move.getY())) {
             this.players.remove(this.curPlayer);
         } else {
-            curPlayer++;
+            this.curPlayer++;
             isMoveValid = true;
             this.field.set(move.getX(), move.getY(), player);
         }
 
-        curPlayer %= this.players.size();
+        this.curPlayer %= this.players.size();
         return new TurnResult(player, move, isMoveValid, this.victoryChecker.check(field));
     }
 

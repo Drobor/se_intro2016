@@ -49,9 +49,9 @@ public class GameRunner {
         temp = this.sc.nextLine().trim().toLowerCase();
         if (temp.equals("ticktacktoe")) {
             System.out.println("type in row length required for victory");
-            int rowLength = this.sc.nextInt();
+            int rowLength = Integer.parseInt(this.sc.nextLine());
             System.out.println("type \"true\" to accept diagonal rows as victory diagonals \nor\n \"false\" to ignore diagonals");
-            boolean diagonals = Boolean.parseBoolean(sc.nextLine());
+            boolean diagonals = Boolean.parseBoolean(this.sc.nextLine());
             return new RowVictoryChecker(rowLength, diagonals);
         } else if (temp.equals("connected"))
             return new MostConnectedVictoryChecker();

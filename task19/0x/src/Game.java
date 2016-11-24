@@ -36,11 +36,11 @@ public class Game {
     }
 
     public TurnResult makeTurn() {
-        Player player = players.get(curPlayer);
+        Player player = this.players.get(this.curPlayer);
         Point move = player.getMove(this.field.getSafeAccessField());
         boolean isMoveValid = false;
         if (!this.field.isEmpty(move.getX(), move.getY())) {
-            this.players.remove(curPlayer);
+            this.players.remove(this.curPlayer);
         } else {
             curPlayer++;
             isMoveValid = true;

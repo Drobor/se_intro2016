@@ -3,16 +3,7 @@
  */
 public class ConsoleInputProvider implements IInputProvider {
     public Point getMove(IField field) {
-        for (int y = 0; y < field.getSizeY(); y++) {
-            for (int x = 0; x < field.getSizeX(); x++) {
-                Player curPlayer = field.get(x, y);
-                if (curPlayer == null)
-                    System.out.print("  ");
-                else
-                    System.out.print(curPlayer.getPlayerChar() + " ");
-            }
-            System.out.println();
-        }
+        System.out.print(field.print());
         System.out.println("Enter your turn coordinates (starting at zero) divided by space or newline");
         int x = readInt();
         int y = readInt();

@@ -11,7 +11,7 @@ public class GameRunner {
     public void runGame(boolean awaitEachTurn) {
         TurnResult turn;
         for (turn = this.game.makeTurn(); !turn.getGameState().getIsDraw() && turn.getGameState().getWinner() == null; turn = this.game.makeTurn()) {
-            this.logger.Log(this.game, turn);
+            this.logger.log(this.game, turn);
             if (awaitEachTurn)
                 try {
                     for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) ;
@@ -19,7 +19,7 @@ public class GameRunner {
                     //Should do something here. Though nothing should be fine. Hopefully
                 }
         }
-        this.logger.Log(this.game, turn);
+        this.logger.log(this.game, turn);
         if (awaitEachTurn)
             try {
                 for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) ;

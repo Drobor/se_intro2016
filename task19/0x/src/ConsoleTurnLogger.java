@@ -4,7 +4,7 @@
 public class ConsoleTurnLogger implements IGameLogger {
     private int turnCounter;
 
-    public void Log(Game game, TurnResult turnResult) {
+    public void log(IField field, TurnResult turnResult) {
         Player curPlayer = turnResult.getCurrentPlayer();
         GameState state = turnResult.getGameState();
 

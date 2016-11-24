@@ -5,9 +5,8 @@ public class ConsoleFieldTurnLogger implements IGameLogger {
     private ConsoleFieldLogger fieldLogger = new ConsoleFieldLogger();
     private ConsoleTurnLogger turnLogger = new ConsoleTurnLogger();
 
-    public void Log(Game game, TurnResult turnResult) {
-        this.turnLogger.Log(game, turnResult);
-        this.fieldLogger.Log(game, turnResult);
-
+    public void log(IField field, TurnResult turnResult) {
+        this.turnLogger.log(field, turnResult);
+        this.fieldLogger.log(field, turnResult);
     }
 }

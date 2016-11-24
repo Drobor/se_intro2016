@@ -23,7 +23,7 @@ public class RowVictoryChecker implements IVictoryChecker {
         return isDraw(field);
     }
 
-    GameState isDraw(IField field) {
+    private GameState isDraw(IField field) {
         for (int x = 0; x < field.getSizeX(); x++)
             for (int y = 0; y < field.getSizeY(); y++)
                 if (field.isEmpty(x, y))
@@ -31,7 +31,7 @@ public class RowVictoryChecker implements IVictoryChecker {
         return new GameState(true);
     }
 
-    GameState checkDiagonals(IField field, int sx, int sy) {
+    private GameState checkDiagonals(IField field, int sx, int sy) {
         int upRightCorner = sy + this.rowLength - 1;
         Player d1Player = field.get(sx, sy);
         Player d2Player = field.get(sx, upRightCorner);
@@ -48,7 +48,7 @@ public class RowVictoryChecker implements IVictoryChecker {
         return null;
     }
 
-    GameState checkHorizontalVertical(IField field, int sx, int sy) {
+    private GameState checkHorizontalVertical(IField field, int sx, int sy) {
         for (int x = 0; x < this.rowLength; x++) {
             Player curPlayer = field.get(sx + x, sy);
 

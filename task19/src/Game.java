@@ -56,23 +56,12 @@ public class Game {
         return new TurnResult(player, move, isMoveValid, this.victoryChecker.check(field));
     }
 
-    public Game clone() {
-        Game returns = new Game(field.getSizeX(), field.getSizeY(), victoryChecker);
-        for (Player player : players) {
-            returns.players.add(player);
-        }
-        returns.victoryChecker = victoryChecker;
-        for (Character c : usedChars) {
-            returns.usedChars.add(c);
-        }
-        returns.curPlayer = curPlayer;
-        returns.field = new Field(field.getSizeX(), field.getSizeY());
+    public void clearField() {
         for (int x = 0; x < field.getSizeX(); x++) {
             for (int y = 0; y < field.getSizeY(); y++) {
-                returns.field.set(x, y, field.get(x, y));
+                field.set(x, y, null);
             }
         }
-        return returns;
     }
 
     public IField getField() {

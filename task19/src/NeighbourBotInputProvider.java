@@ -10,13 +10,12 @@ class NeighbourBotInputProvider extends RandomBotInputProvider implements IInput
 
     public Point getMove(IField field) {
         while (!this.myPoints.isEmpty()) {
-            int optionsCount = 0;
             int pointPos = this.rnd.nextInt(this.myPoints.size());
-
             Point point = this.myPoints.get(pointPos);
             int x = point.getX();
             int y = point.getY();
 
+            int optionsCount = 0;
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
                     if (canMoveHere(x + dx, y + dy, field)) {

@@ -14,18 +14,19 @@ public class GameRunner {
         int draws = 0;
         HashMap<Player, Integer> victorysCount = new HashMap<>();
         for (int i = 0; i < matchesCount; i++) {
-            Game game = this.game.clone();
-            GameState state;
-            for (state = game.makeTurn().getGameState(); !state.gameEnded(); state = game.makeTurn().getGameState()) {
+            this.game.clearField();
+            TurnResult turn;
+            for (turn = game.makeTurn(); !turn.getGameState().gameEnded(); turn = game.makeTurn()) {
+                this.logger.log(this.game.getField(), turn);
             }
-            if (state.getIsDraw()) {
+            if (turn.getGameState().getIsDraw()) {
                 draws++;
             } else {
-                Player winner = state.getWinner();
+                Player winner = turn.getGameState().getWinner();
                 if (victorysCount.containsKey(winner)) {
                     victorysCount.put(winner, victorysCount.get(winner) + 1);
                 } else {
-                    victorysCount.put(winner, 0);
+                    victorysCount.put(winner, 1);
                 }
             }
         }
@@ -37,6 +38,7 @@ public class GameRunner {
     }
 
     public void runGame(boolean awaitEachTurn) {
+        this.game.clearField();
         TurnResult turn;
         for (turn = this.game.makeTurn(); !turn.getGameState().getIsDraw() && turn.getGameState().getWinner() == null; turn = this.game.makeTurn()) {
             this.logger.log(this.game.getField(), turn);
@@ -53,7 +55,6 @@ public class GameRunner {
         if (awaitEachTurn) {
             try {
                 for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) {
-                    ;
                 }
             } catch (Exception ex) {
                 //Should do something here. Though nothing should be fine. Hopefully
@@ -62,14 +63,13 @@ public class GameRunner {
     }
 
     public void setupGame() {
-        boolean atLeastOnePlayer = false;
-
         Point fieldSize = getFieldSize();
         IVictoryChecker ruleSet = getRuleSet();
 
         this.game = new Game(fieldSize.getX(), fieldSize.getY(), ruleSet);
         this.logger = getLogger();
-        while (!atLeastOnePlayer) {
+
+        for (boolean atLeastOnePlayer = false; !atLeastOnePlayer; ) {
             for (IInputProvider player = getPlayer(); player != null; player = getPlayer()) {
                 this.game.createPlayer(player, getPlayerName());
                 atLeastOnePlayer = true;
@@ -78,9 +78,8 @@ public class GameRunner {
     }
 
     private IVictoryChecker getRuleSet() {
-        String temp = "";
         System.out.println("Type \"ticktacktoe\" for ticktacktoe rule set\nor\n\"connected\" for rule set in which winner is a player who has largest connected area of points");
-        temp = this.sc.nextLine().trim().toLowerCase();
+        String temp = this.sc.nextLine().trim().toLowerCase();
         if (temp.equals("ticktacktoe")) {
             System.out.println("type in row length required for victory");
             int rowLength = Integer.parseInt(this.sc.nextLine());

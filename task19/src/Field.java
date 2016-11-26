@@ -23,13 +23,18 @@ public class Field extends ReadOnlyField implements IField {
 
     public void set(int x, int y, Player val) {
         Point pt = new Point(x, y);
-        int pos = this.pointPos.remove(pt);
-
-        this.emptyCells.set(pos, this.emptyCells.get(this.emptyCells.size() - 1));
-        this.pointPos.put(this.emptyCells.get(pos), pos);
-        this.emptyCells.remove(this.emptyCells.size() - 1);
-
-        this.field[x][y] = val;
+        if (this.field[x][y] != val) {
+            if (val == null) {
+                this.pointPos.put(pt, emptyCells.size());
+                this.emptyCells.add(pt);
+            } else {
+                int pos = this.pointPos.remove(pt);
+                this.emptyCells.set(pos, this.emptyCells.get(this.emptyCells.size() - 1));
+                this.pointPos.put(this.emptyCells.get(pos), pos);
+                this.emptyCells.remove(this.emptyCells.size() - 1);
+            }
+            this.field[x][y] = val;
+        }
     }
 
     public ReadOnlyField getSafeAccessField() {//just converting to readonly interface isnt hardcore enough protection

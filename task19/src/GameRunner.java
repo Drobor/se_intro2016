@@ -14,6 +14,7 @@ public class GameRunner {
         int draws = 0;
         HashMap<Player, Integer> victorysCount = new HashMap<>();
         for (int i = 0; i < matchesCount; i++) {
+            Game game = this.game.clone();
             GameState state;
             for (state = game.makeTurn().getGameState(); !state.gameEnded(); state = game.makeTurn().getGameState()) {
             }
@@ -42,7 +43,6 @@ public class GameRunner {
             if (awaitEachTurn) {
                 try {
                     for (int c = System.in.read(); c != 10 && c != 13; c = System.in.read()) {
-                        ;
                     }
                 } catch (Exception ex) {
                     //Should do something here. Though nothing should be fine. Hopefully

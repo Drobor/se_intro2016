@@ -18,7 +18,7 @@ public class GameState {
     }
 
     public boolean gameEnded() {
-        return this.isDraw | this.winner != null;
+        return this.isDraw || !(this.winner == null);
     }
 
     public Player getWinner() {

@@ -13,13 +13,15 @@ public class GameState {
         this.winner = winner;
     }
 
-    public boolean getIsDraw()
-    {
+    public boolean getIsDraw() {
         return this.isDraw;
     }
 
-    public Player getWinner()
-    {
+    public boolean gameEnded() {
+        return this.isDraw | this.winner != null;
+    }
+
+    public Player getWinner() {
         return this.winner;
     }
 }

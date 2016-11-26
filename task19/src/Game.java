@@ -20,16 +20,20 @@ public class Game {
             Player player = new Player(playerChar, IInputProvider, playerName);
             this.players.add(player);
             return player;
-        } else
+        } else {
             return null;
+        }
     }
 
     public Player createPlayer(IInputProvider IInputProvider, String playerName) {
-        if (this.curAutoChar > 30000)
+        if (this.curAutoChar > 30000) {
             return null;
-        if (this.curAutoChar == '9')
+        }
+        if (this.curAutoChar == '9') {
             this.curAutoChar = 'A';
-        for (this.curAutoChar++; !this.usedChars.add(this.curAutoChar); this.curAutoChar++) ;
+        }
+        for (this.curAutoChar++; !this.usedChars.add(this.curAutoChar); this.curAutoChar++) {
+        }
         Player player = new Player(this.curAutoChar, IInputProvider, playerName);
         this.players.add(player);
         return player;
@@ -46,8 +50,9 @@ public class Game {
             isMoveValid = true;
             this.field.set(move.getX(), move.getY(), player);
         }
-        if (this.players.size() > 0)
+        if (this.players.size() > 0) {
             this.curPlayer %= this.players.size();
+        }
         return new TurnResult(player, move, isMoveValid, this.victoryChecker.check(field));
     }
 

@@ -13,8 +13,9 @@ public class ConsoleInputProvider implements IInputProvider {
     private int readInt() {
         int x = 0;
         try {
-            for (int c = System.in.read(); c != 10 && c != 13 && c != 32; c = System.in.read())
+            for (int c = System.in.read(); c != 10 && c != 13 && c != 32; c = System.in.read()) {
                 x = x * 10 + c - 48;
+            }
         } catch (Exception ex) {
             System.out.println("wrong input");
             return -1;

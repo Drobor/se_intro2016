@@ -17,20 +17,22 @@ public class ReadOnlyField implements IField {
     }
 
     public ReadOnlyField(int fieldSizeX, int fieldSizeY) {
-        if (fieldSizeX < 1 || fieldSizeY < 1)
+        if (fieldSizeX < 1 || fieldSizeY < 1) {
             throw new RuntimeException("impossible field parameters");
+        }
         this.field = new Player[fieldSizeX][fieldSizeY];
         init();
     }
 
     private void init() {
         int pos = 0;
-        for (int x = 0; x < getSizeX(); x++)
+        for (int x = 0; x < getSizeX(); x++) {
             for (int y = 0; y < getSizeY(); y++) {
                 Point pt = new Point(x, y);
                 this.emptyCells.add(pt);
                 this.pointPos.put(pt, pos++);
             }
+        }
         this.safeAccessEmptyCells = Collections.unmodifiableList(this.emptyCells);
     }
 
@@ -47,10 +49,13 @@ public class ReadOnlyField implements IField {
     }
 
     public boolean hasEmpty() {
-        for (int x = 0; x < this.field.length; x++)
-            for (int y = 0; y < this.field[0].length; y++)
-                if (this.field[x][y] == null)
+        for (int x = 0; x < this.field.length; x++) {
+            for (int y = 0; y < this.field[0].length; y++) {
+                if (this.field[x][y] == null) {
                     return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -66,46 +71,54 @@ public class ReadOnlyField implements IField {
         StringBuilder sb = new StringBuilder();
         int fieldMarksSize = (int) Math.log10(Math.max(getSizeX(), getSizeY())) + 2;
 
-        for (int i = 0; i < fieldMarksSize + 2; i++)
+        for (int i = 0; i < fieldMarksSize + 2; i++) {
             sb.append(' ');
+        }
 
         for (int x = 0; x < getSizeX(); x += 2) {
             String idx = Integer.toString(x);
             sb.append(idx);
-            for (int i = 0; i < 4 - idx.length(); i++)
+            for (int i = 0; i < 4 - idx.length(); i++) {
                 sb.append(' ');
+            }
         }
         sb.append('\n');
-        for (int i = 0; i < fieldMarksSize + 2 + getSizeX() * 2; i++)
+        for (int i = 0; i < fieldMarksSize + 2 + getSizeX() * 2; i++) {
             sb.append('-');
+        }
         sb.append("\n");
 
         for (int y = 0; y < getSizeY(); y++) {
             String idx = Integer.toString(y);
             sb.append(idx);
-            for (int i = 0; i < fieldMarksSize - idx.length(); i++)
+            for (int i = 0; i < fieldMarksSize - idx.length(); i++) {
                 sb.append(' ');
+            }
             sb.append("| ");
             for (int x = 0; x < getSizeX(); x++) {
                 Player curPlayer = get(x, y);
-                if (curPlayer == null)
+                if (curPlayer == null) {
                     sb.append("  ");
-                else
+                } else {
                     sb.append(curPlayer.getPlayerChar() + " ");
+                }
             }
             sb.append('\n');
         }
 
-        for (int i = 0; i < fieldMarksSize + 2 + getSizeX() * 2; i++)
+        for (int i = 0; i < fieldMarksSize + 2 + getSizeX() * 2; i++) {
             sb.append('-');
+        }
         sb.append("\n");
-        for (int i = 0; i < fieldMarksSize + 4; i++)
+        for (int i = 0; i < fieldMarksSize + 4; i++) {
             sb.append(' ');
+        }
         for (int x = 1; x < getSizeX(); x += 2) {
             String idx = Integer.toString(x);
             sb.append(idx);
-            for (int i = 0; i < 4 - idx.length(); i++)
+            for (int i = 0; i < 4 - idx.length(); i++) {
                 sb.append(' ');
+            }
         }
         sb.append('\n');
 

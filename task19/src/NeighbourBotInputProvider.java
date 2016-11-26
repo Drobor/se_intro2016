@@ -17,10 +17,13 @@ class NeighbourBotInputProvider extends RandomBotInputProvider implements IInput
             int x = point.getX();
             int y = point.getY();
 
-            for (int dx = -1; dx <= 1; dx++)
-                for (int dy = -1; dy <= 1; dy++)
-                    if (canMoveHere(x + dx, y + dy, field))
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (canMoveHere(x + dx, y + dy, field)) {
                         this.moveOptions[optionsCount++] = new Point(x + dx, y + dy);
+                    }
+                }
+            }
 
             if (optionsCount > 0) {
                 Point move = this.moveOptions[this.rnd.nextInt(optionsCount)];
@@ -37,8 +40,9 @@ class NeighbourBotInputProvider extends RandomBotInputProvider implements IInput
     }
 
     private boolean canMoveHere(int x, int y, IField field) {
-        if (x >= 0 && y >= 0 && x < field.getSizeX() && y < field.getSizeY())
+        if (x >= 0 && y >= 0 && x < field.getSizeX() && y < field.getSizeY()) {
             return field.isEmpty(x, y);
+        }
         return false;
     }
 }

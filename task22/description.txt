@@ -66,8 +66,8 @@ VectorF
 SquareMatrixF
     квадратная матрица. 32 битная точность вычислений. NaN +-inf являются допустимыми значениями
 
-    public VectorF(final int size)
-        создвет вектор с заданной размерностью size
+    public SquareMatrixF(final int size)
+        создвет квадратную матрицу с заданной размерностью size
         throws
             Вызывает исключение, если size отрицателен
 
